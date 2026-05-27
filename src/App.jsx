@@ -22,7 +22,7 @@ const auth = getAuth(app);
 
 const APP_ID = "QuizApp_ManagementAnalysis_001";
 
-// --- Quiz Questions Data (完全網羅版) ---
+// --- Quiz Questions Data (出題時のネタバレ・ヒントを完全排除した演習特化版) ---
 const QUESTIONS = [
   {
     id: 1,
@@ -36,12 +36,12 @@ const QUESTIONS = [
       { key: "エ", text: "企業の売上高、総資産などが、どれくらい成長しているかを分析する手法に成長性分析がある。売上高成長率、総資産成長率などの指標がある。" }
     ],
     answer: "ウ",
-    explanation: "「労働生産性」は生産性分析になります。「労働生産性」とは従業員一人あたりの付加価値であり、生産性分析では最も重要な指標です。なお「固定長期適合率」は、安全性分析にあたるので、不適切です。安全性分析には「短期安全性」「長期安全性」「資本構成」の分析があります。",
+    explanation: "「労働生産性」は生産性分析になります。「労働生産性」とは従業員一人あたりの付加価値であり、生産性分析では最も重要な指標です。なお「固定長期適合率」は、安全性分析にあたるので、生産性分析の指標として並べられている記述は不適切です。安全性分析には「短期安全性」「長期安全性」「資本構成」の分析があります。",
     tableData: [
       { type: "収益性分析", desc: "企業が利益を上げる能力を分析します。主な経営指標に「総資本経常利益率」「売上高総利益率」などがあります。" },
       { type: "安全性分析", desc: "企業の支払能力や倒産リスクを分析するための代表的な指標に「流動比率」「当座比率」「固定長期適合率」などがあります。" },
       { type: "生産性分析", desc: "投入したインプット（経営資源）に対するアウトプット（付加価値）の効率を分析します。主な指標に「労働生産性」があります。" },
-      { type: "成長性分析", desc: "企業の売上高や利益、総資産などが一定期間でどれぐらい成長しているかを分析します。主な指標に「売上高成長率」「総資産成長率」などがあります。" }
+      { type: "成長性分析", desc: "企業の売上高や利益、総資産などが一定期間でどれぐらい成長しているかを分析します。主な経営指標に「売上高成長率」「経常利益成長率」「総資本成長率」などがあります。" }
     ]
   },
   {
@@ -56,7 +56,7 @@ const QUESTIONS = [
       { key: "エ", text: "資本利益率を高めるためには、売上高利益率を高めるか、資本回転率を高める必要がある。" }
     ],
     answer: "ウ",
-    explanation: "資本利益率の計算は、利益は損益計算書(P/L)から、資本は貸借対照表(B/S)から取得します。貸借対照表だけでは数値を求めることができないので、不適切です。\n\n・事業利益を使用した指標（総資本事業利益率など）は、より厳密に企業の資金調達によらない収益性を表せます。\n・経営資本を使用した指標（経営資本営業利益率など）は、資産のうち本業で使用されていないものを除き、本業からの儲けを表せます。",
+    explanation: "資本利益率の計算は、利益は損益計算書(P/L)から、資本は貸借対照表(B/S)から取得します。貸借対照表の数値だけでは分母しか分からず、数値を求めることができないので、不適切です。\n\n・事業利益を使用した指標（総資本事業利益率など）は、より厳密に企業の資金調達によらない収益性を表せます。\n・経営資本を使用した指標（経営資本営業利益率など）は、資産のうち本業で使用されていないものを除き、本業からの儲けを表せます。",
     formulas: [
       { name: "資本利益率", calc: "利益 ÷ 資本 × 100（％）" },
       { name: "事業利益", calc: "営業利益 ＋ 受取利息･配当金 ＋ 有価証券利息" },
@@ -67,14 +67,14 @@ const QUESTIONS = [
   },
   {
     id: 3,
-    title: "問題 3 収益性分析 資本利益率",
+    title: "問題 3 収益性分析　資本利益率",
     category: "収益性分析",
     question: "Y社の以下の貸借対照表、損益計算書に基づいて、自己資本利益率、経営資本営業利益率、総資本事業利益率の組み合わせとして、最も適切なものを下記の解答群から選べ。なお計算結果は、小数点第1位を切り捨てること。",
     options: [
-      { key: "ア", text: "自己資本利益率 66％ 経営資本営業利益率 50％ 総資本事業利益率 30％" },
-      { key: "イ", text: "自己資本利益率 66％ 経営資本営業利益率 31％ 総資本事業利益率 33％" },
-      { key: "ウ", text: "自己資本利益率 39％ 経営資本営業利益率 31％ 総資本事業利益率 30％" },
-      { key: "エ", text: "自己資本利益率 39％ 経営資本営業利益率 31％ 総資本事業利益率 33％" }
+      { key: "ア", text: "自己資本利益率 66％　経営資本営業利益率 50％　総資本事業利益率 30％" },
+      { key: "イ", text: "自己資本利益率 66％　経営資本営業利益率 31％　総資本事業利益率 33％" },
+      { key: "ウ", text: "自己資本利益率 39％　経営資本営業利益率 31％　総資本事業利益率 30％" },
+      { key: "エ", text: "自己資本利益率 39％　経営資本営業利益率 31％　総資本事業利益率 33％" }
     ],
     answer: "エ",
     explanation: "問題文より、計算結果は小数点第1位を切り捨てる必要があります。\n\n1. 自己資本利益率 ＝ 当期純利益(198) ÷ 自己資本(資本金300 ＋ 資本剰余金100 ＋ 利益剰余金100) × 100 ＝ 39.6％ → 切り捨てて 39％\n2. 経営資本営業利益率 ＝ 営業利益(300) ÷ 経営資本(総資産1,000 － 投資有価証券50) × 100 ＝ 31.5789…％ → 切り捨てて 31％\n3. 総資本事業利益率 ＝ 事業利益(営業利益300 ＋ 受取利息30) ÷ 総資本(1,000) × 100 ＝ 33％",
@@ -100,11 +100,11 @@ const QUESTIONS = [
       { name: "特別損失", val: 0 }, { name: "税引前当期純利益", val: 330 }, { name: "法人税等", val: 132 },
       { name: "当期純利益", val: 198 }
     ],
-    extraInfo: "※貸借対照表が一期分しか提示されない場合は、その数字をそのまま使います。もし二期分示されている場合は平均値を使います。"
+    extraInfo: "※貸借対照表が一期分しか提示されない場合は、その数字をそのまま使います。もし前期と当期の二期分が示されている場合は、二期分の平均値を使います。"
   },
   {
     id: 4,
-    title: "問題 4 収益性分析 売上高利益率",
+    title: "問題 4 収益性分析　売上高利益率",
     category: "収益性分析",
     question: "A社に関する次の資料に基づいて、売上高利益率に関する記述として最も適切なものはどれか。",
     options: [
@@ -126,17 +126,17 @@ const QUESTIONS = [
   },
   {
     id: 5,
-    title: "問題 5 収益性分析 効率性分析",
+    title: "問題 5 収益性分析　効率性分析",
     category: "収益性分析",
     question: "次の表において記号「↑」は指標の値の上昇を、「↓」は指標の値の低下を表す。各指標が良好になる場合の空欄Ａ～Ｄに入る記号の組み合わせとして、最も適切なものを下記の解答群から選べ。",
     options: [
-      { key: "ア", text: "Ａ：↓ Ｂ：↑ Ｃ：↓ Ｄ：↓" },
-      { key: "イ", text: "Ａ：↑ Ｂ：↑ Ｃ：↓ Ｄ：↓" },
-      { key: "ウ", text: "Ａ：↓ Ｂ：↑ Ｃ：↑ Ｄ：↑" },
-      { key: "エ", text: "Ａ：↑ Ｂ：↑ Ｃ：↑ Ｄ：↑" }
+      { key: "ア", text: "Ａ：↓　Ｂ：↑　Ｃ：↓ Ｄ：↓" },
+      { key: "イ", text: "Ａ：↑　Ｂ：↑　Ｃ：↓ Ｄ：↓" },
+      { key: "ウ", text: "Ａ：↓　Ｂ：↑　Ｃ：↑ Ｄ：↑" },
+      { key: "エ", text: "Ａ：↑　Ｂ：↑　Ｃ：↑ Ｄ：↑" }
     ],
     answer: "イ",
-    explanation: "「回転率」の計算式は「売上高÷資産」等であり、値が高い(↑)ほど資産を効率活用して売上に貢献しているため良好です（総資本回転率A、固定資産回転率B）。\n「回転期間」は回転率の逆数に365日等を掛けた「資産÷売上」であり、値が低い・短い(↓)ほど資産が効率よく本業で回転しているため良好です（売上債権回転期間C、棚卸資産回転期間D）。",
+    explanation: "「回転率」の計算式は「売上高÷資産」等であり、値が高い(↑)ほど資産を効率活用して売主に貢献しているため良好です（総資本回転率A、固定資産回転率B）。\n「回転期間」は回転率の逆数に365日等を掛けた「資産÷売上」であり、値が低い・短い(↓)ほど資産が効率よく本業で回転しているため回収速度が早く良好となります（売上債権回転期間C、棚卸資産回転期間D）。",
     matrix: [
       { metric: "総資本回転率", key: "（ Ａ ）" },
       { metric: "固定資産回転率", key: "（ Ｂ ）" },
@@ -151,13 +151,13 @@ const QUESTIONS = [
     category: "安全性分析",
     question: "Y社の以下の財務資料に基づいて、固定長期適合率、自己資本比率、負債比率の組み合わせとして、最も適切なものを下記の解答群から選べ。なお計算結果は小数点第1位を切り捨てること。",
     options: [
-      { key: "ア", text: "固定長期適合率 54％ 自己資本比率 41％ 負債比率 122％" },
-      { key: "イ", text: "固定長期適合率 54％ 自己資本比率 240％ 負債比率 122％" },
-      { key: "ウ", text: "固定長期適合率 46％ 自己資本比率 240％ 負債比率 140％" },
-      { key: "エ", text: "固定長期適合率 46％ 自己資本比率 41％ 負債比率 140％" }
+      { key: "ア", text: "固定長期適合率 54％　自己資本比率 41％　負債比率 122％" },
+      { key: "イ", text: "固定長期適合率 54％　自己資本比率 240％　負債比率 122％" },
+      { key: "ウ", text: "固定長期適合率 46％　自己資本比率 240％　負債比率 140％" },
+      { key: "エ", text: "固定長期適合率 46％　自己資本比率 41％　負債比率 140％" }
     ],
     answer: "エ",
-    explanation: "公式に基づき算出します（小数点第1位切り捨て）：\n\n1. 固定長期適合率 ＝ 固定資産(190＋110＝300) ÷ （固定負債100 ＋ 自己資本[300＋150＋90＝540]） × 100 ＝ 46.875％ → 46％\n2. 自己資本比率 ＝ 自己資本(540) ÷ 総資本(1,300) × 100 ＝ 41.538…％ → 41％\n3. 負債比率 ＝ 負債(250＋210＋200＋100＝760) ÷ 自己資本(540) × 100 ＝ 140.740…％ → 140％",
+    explanation: "公式に基づき算出します（小数点第1位切り捨て）：\n\n1. 固定長期適合率 ＝ 固定資産(有形190＋無形110＝300) ÷ （固定負債[長期借入]100 ＋ 自己資本[資本300＋資本剰余150＋利益剰余90＝540]） × 100 ＝ 300 ÷ 640 × 100 ＝ 46.875％ → 46％\n2. 自己資本比率 ＝ 自己資本(540) ÷ 総資本(1,300) × 100 ＝ 41.538…％ → 41％\n3. 負債比率 ＝ 負債(支払手形250＋買掛金210＋短期借入200＋長期借入100＝760) ÷ 自己資本(540) × 100 ＝ 140.740…％ → 140％",
     bsData: {
       left: [
         { name: "現金及び預金", val: 230 }, { name: "受取手形", val: 100 }, { name: "売掛金", val: 320 },
@@ -178,13 +178,13 @@ const QUESTIONS = [
     category: "安全性分析",
     question: "流動比率、当座比率、固定比率、固定長期適合率について、A社がB社より良好な場合（Ａで表す）とB社がA社より良好な場合（Bで表す）の組み合わせとして最も適切なものはどれか。",
     options: [
-      { key: "ア", text: "流動比率：Ｂ 当座比率：Ａ 固定比率：Ｂ 固定長期適合率：Ａ" },
-      { key: "イ", text: "流動比率：Ａ 当座比率：Ｂ 固定比率：Ａ 固定長期適合率：Ｂ" },
-      { key: "ウ", text: "流動比率：Ｂ 当座比率：Ｂ 固定比率：Ａ 固定長期適合率：Ａ" },
-      { key: "エ", text: "流動比率：Ｂ 当座比率：Ｂ 固定比率：Ｂ 固定長期適合率：Ａ" }
+      { key: "ア", text: "流動比率：Ｂ　当座比率：Ａ　固定比率：Ｂ　固定長期適合率：Ａ" },
+      { key: "イ", text: "流動比率：Ａ　当座比率：Ｂ　固定比率：Ａ　固定長期適合率：Ｂ" },
+      { key: "ウ", text: "流動比率：Ｂ　当座比率：Ｂ　固定比率：Ａ　固定長期適合率：Ａ" },
+      { key: "エ", text: "流動比率：Ｂ　当座比率：Ｂ　固定比率：Ｂ　固定長期適合率：Ａ" }
     ],
     answer: "ア",
-    explanation: "各比率を公式から計算し、優劣を判定します（流動・当座は高い方が良好、固定・固定長期適合は低い方が良好）。\n\n・流動比率: A社＝140.00%、B社＝142.86% → B社が良好 (Ｂ)\n・当座比率: A社＝130.00%、B社＝128.57% → A社が良好 (Ａ) （※当座資産＝現預金＋受取手形＋売掛金＋有価証券）\n・固定比率: A社＝100.00%、B社＝93.75% → B社が良好 (Ｂ)\n・固定長期適合率: A社＝62.96%、B社＝71.43% → A社が良好 (Ａ)",
+    explanation: "各比率を公式から計算し、優劣を判定します（流動・当座は高い方が良好、固定・固定長期適合は低い方が良好）。\n\n・流動比率: A社＝140.00%、B社＝142.86% → B社が良好 (B)\n・当座比率: A社＝130.00%、B社＝128.57% → A社が良好 (A) （※当座資産＝現預金＋受取手形＋売掛金＋有価証券）\n・固定比率: A社＝100.00%、B社＝93.75% → B社が良好 (B)\n・固定長期適合率: A社＝62.96%、B社＝71.43% → A社が良好 (A)",
     bsComparisonTable: {
       headers: ["資産の部", "A社", "B社", "負債・純資産の部", "A社", "B社"],
       rows: [
@@ -212,12 +212,12 @@ const QUESTIONS = [
       { key: "エ", text: "「付加価値率」は「付加価値」に占める「売上高」の割合である。" }
     ],
     answer: "ウ",
-    explanation: "労働生産性 ＝ 付加価値 ÷ 従業員数 ＝ 付加価値/売上高 × 売上高/従業員数 ＝ 付加価値率 × 従業員1人あたり売上高。よってウが正しいです。\nア：付加価値は「インプット」ではなく「アウトプット」です。\nイ：付加価値に外注加工費や間接材料費は含みません。\nエ：付加価値率は「売上高」に占める「付加価値」の割合です。",
+    explanation: "労働生産性 ＝ 付加価値 ÷ 従業員数 ＝ (付加価値÷売上高) × (売上高÷従業員数) ＝ 付加価値率 × 従業員1人あたり売上高。よってウが正しいです。\nア：付加価値は「インプット」ではなく「アウトプット（成果）」です。\nイ：付加価値の算出公式に「外注加工費」や「間接材料費」は含まれません。\nエ：付加価値率は「売上高」に占める「付加価値」の割合です。",
     formulaDetails: "付加価値 ＝ 経常利益 ＋ 人件費 ＋ 賃借料 ＋ 純金利費用 ＋ 減価償却費 ＋ 租税公課"
   },
   {
     id: 9,
-    title: "問題 9 生産性分析 労働生産性の分解",
+    title: "問題 9 生産性分析　労働生産性の分解",
     category: "生産性分析",
     question: "次の資料に基づき、労働生産性の数値として、最も適切なものを下記の解答群から選べ。",
     options: [
@@ -227,7 +227,7 @@ const QUESTIONS = [
       { key: "エ", text: "40,000,000" }
     ],
     answer: "ウ",
-    explanation: "労働生産性は「労働装備率（資本装備率） × 設備生産性（資本生産性）」で求められます。\n\n1. 設備生産性 ＝ 付加価値額(35,000,000) ÷ 有形固定資産(20,000,000) ＝ 1.75\n2. 労働生産性 ＝ 労働装備率(20,000,000) × 設備生産性(1.75) ＝ 35,000,000 円",
+    explanation: "労働生産性は「労働装備率（資本装備率） × 設備生産性（資本生産性）」に分解して計算します。\n\n1. 設備生産性 ＝ 付加価値額(35,000,000) ÷ 有形固定資産(20,000,000) ＝ 1.75\n2. 労働生産性 ＝ 労働装備率(20,000,000) × 設備生産性(1.75) ＝ 35,000,000 円",
     calcTable: [
       { item: "労働装備率", value: "20,000,000 円" },
       { item: "付加価値額", value: "35,000,000 円" },
@@ -247,7 +247,7 @@ const QUESTIONS = [
       { key: "エ", text: "損益分岐点とは、販売量がちょうど0になるときの利益のことをさす。" }
     ],
     answer: "イ",
-    explanation: "勘定科目法は記述の通り適切です（仕入高等を変動費、家賃等を固定費とする方法）。\nア：変動費は営業量の増加に比例して「増加」する費用です。\nウ：記述は「最小二乗法」の内容です。高低点法は「最高売上高と最低売上高の２点」から計算します。\nエ：損益分岐点とは、「利益がちょうど0になるときの売上高（販売量）」を指します。",
+    explanation: "勘定科目法は記述の通り適切です（仕入高等を変動費、支払家賃や社員給料を固定費とする手法）。\nア：変動費は営業量の増加に比例して「増加」する費用です。\nウ：記述は「最小二乗法」の内容にあたるため誤りです。高低点法は過去の実績の最高点・最低点の2点から傾きを求めます。\nエ：損益分岐点とは、「利益がちょうど0になるときの売上高（またはそのときの販売量）」を指します。",
     costType: [
       { name: "変動費", behavior: "営業量の増加に比例して増加", examples: "材料費、運送費、販売促進費" },
       { name: "固定費", behavior: "営業量の増減に関係なく一定に発生", examples: "支払家賃、給料、支払利息、火災保険料" }
@@ -257,12 +257,12 @@ const QUESTIONS = [
     id: 11,
     title: "問題 11 損益分岐点(CVP)分析",
     category: "CVP分析",
-    question: "企業の収益力の余裕をはかる尺度について述べた次の文章の空欄Ａ、空欄Ｂに入る数値として、最も適切なものを下記の解答群から選べ。\n「前事業年度の損益分岐点売上高は（ Ａ ）万円である。このとき、安全余裕率、すなわち売上高が損益分岐点売上高を上回る額の売上高に対する比率は（ Ｂ ）％である」",
+    question: "企業の収益力の余裕をはかる尺度について述べた次の文章の空欄Ａ、空欄Ｂに入る数値として、最も適切なものを下記の解答群から選べ。\n「前事業年度の損益分岐点売上高は（ Ａ ）万円である。このとき、安全余裕率は（ Ｂ ）％である」",
     options: [
-      { key: "ア", text: "Ａ：50,000 Ｂ：58.3" },
-      { key: "イ", text: "Ａ：50,000 Ｂ：37.5" },
-      { key: "ウ", text: "Ａ：75,000 Ｂ：58.3" },
-      { key: "エ", text: "Ａ：75,000 Ｂ：37.5" }
+      { key: "ア", text: "Ａ：50,000　Ｂ：58.3" },
+      { key: "イ", text: "Ａ：50,000　Ｂ：37.5" },
+      { key: "ウ", text: "Ａ：75,000　Ｂ：58.3" },
+      { key: "エ", text: "Ａ：75,000　Ｂ：37.5" }
     ],
     answer: "エ",
     explanation: "1. 変動費率 ＝ 変動費72,000 ÷ 売上高120,000 ＝ 0.6\n2. 損益分岐点売上高(A) ＝ 固定費30,000 ÷ (1 － 変動費率0.6) ＝ 75,000（万円）\n3. 安全余裕率(B) ＝ （実際売上高120,000 － 損益分岐点売上高75,000） ÷ 実際売上高120,000 × 100 ＝ 37.5（％）",
@@ -274,7 +274,7 @@ const QUESTIONS = [
   },
   {
     id: 12,
-    title: "問題 12 損益分岐点(CVP)分析 目標売上高の計算",
+    title: "問題 12 損益分岐点(CVP)分析　目標売上高の計算",
     category: "CVP分析",
     question: "当期の損益計算書（要旨）は次のとおりである。変動費、固定費の構造は一定とし、売上原価はすべて変動費とすると、経常利益の目標55,000千円を達成する売上高として、最も適切なものを下記の解答群から選べ（単位：千円）。",
     options: [
@@ -284,7 +284,7 @@ const QUESTIONS = [
       { key: "エ", text: "450,000千円" }
     ],
     answer: "イ",
-    explanation: "条件に従って固変分解を行います。\n\n1. 固定費の計算 ＝ 営業外費用50,000 － 営業外収益20,000 ＋ 販管費固定分20,000 ＝ 50,000（千円）\n2. 変動費の計算 ＝ 売上原価120,000 ＋ 販管費変動分（40,000 － 20,000） ＝ 140,000（千円）\n3. 変動費率 ＝ 140,000 ÷ 200,000 ＝ 0.7\n4. 目標売上高 ＝ （固定費50,000 ＋ 目標利益55,000） ÷ （1 － 変動費率0.7） ＝ 105,000 ÷ 0.3 ＝ 350,000（千円）",
+    explanation: "与えられた条件に従って費用を固変分解し、目標数値を算定します。\n\n1. 固定費 ＝ 営業外費用50,000 － 営業外収益20,000 ＋ 販管費固定分20,000 ＝ 50,000（千円）\n2. 変動費 ＝ 売上原価120,000 ＋ 販管費変動分（40,000 － 20,000） ＝ 140,000（千円）\n3. 変動費率 ＝ 140,000 ÷ 200,000 ＝ 0.7\n4. 目標売上高 ＝ （固定費50,000 ＋ 目標利益55,000） ÷ （1 － 変動費率0.7） ＝ 105,000 ÷ 0.3 ＝ 350,000（千円）",
     plTable: [
       { name: "売上高", val: 200000 }, { name: "売上原価", val: 120000 },
       { name: "販売費及び一般管理費", val: 40000 }, { name: "営業利益", val: 40000 },
@@ -303,21 +303,22 @@ const QUESTIONS = [
     category: "セグメント別損益",
     question: "セグメント別損益分析について述べた次の文章の空欄Ａ、空欄Ｂ、空欄Cに入る語句の組み合わせとして、最も適切なものはどれか。\n「売上高から変動売上原価を引いたものが、Ａである。このＡから変動販売費を引いたものが、Ｂである。Ｂから、個別固定費を引いたものが、Ｃである。」",
     options: [
-      { key: "ア", text: "Ａ：変動製造マージン   Ｂ：限界利益   Ｃ：貢献利益" },
-      { key: "イ", text: "Ａ：変動製造マージン   Ｂ：貢献利益   Ｃ：限界利益" },
-      { key: "ウ", text: "Ａ：製造間接費     Ｂ：限界利益   Ｃ：営業利益" },
-      { key: "エ", text: "Ａ：製造間接費      Ｂ：貢献利益   Ｃ：営業利益" }
+      { key: "ア", text: "Ａ：変動製造マージン　　 Ｂ：限界利益　　　Ｃ：貢献利益" },
+      { key: "イ", text: "Ａ：変動製造マージン　　 Ｂ：貢献利益　　　Ｃ：限界利益" },
+      { key: "ウ", text: "Ａ：製造間接費　　　　 Ｂ：限界利益　　　Ｃ：営業利益" },
+      { key: "エ", text: "Ａ：製造間接費　　　　　 Ｂ：貢献利益　　　Ｃ：営業利益" }
     ],
     answer: "ア",
-    explanation: "直接原価計算に基づく損益計算書の構造に関する問題です。\n・売上高 － 変動売上原価 ＝ 変動製造マージン(A)\n・変動製造マージン － 変動販売費 ＝ 限界利益(B)（売上高から全ての変動費を引いた額）\n・限界利益 － 個別固定費（その事業部固有の固定費） ＝ 貢献利益(C)\n・貢献利益 － 共通固定費（全社共通の本社費など） ＝ 営業利益 となります。",
-    segmentFlow: [
+    explanation: "直接原価計算に基づくセグメント別損益計算書の構造に関する基本知識問題です。\n・売上高 － 変動売上原価 ＝ 変動製造マージン(A)\n・変動製造マージン － 変動販売費 ＝ 限界利益(B)（売上高から変動費総額を引いた、CVPでも用いる共通概念）\n・限界利益 － 個別固定費（その製品や事業部に直接紐づく固定費） ＝ 貢献利益(C)\n・貢献利益 － 共通固定費（各部門に配賦される本社管理費など） ＝ 営業利益 となります。",
+    // 【最重要修正】出題画面側には一切答えが露出しないよう、データフィールドを完全に分離配置
+    segmentFlowExplain: [
       "売上高",
       "  [-] 変動売上原価",
-      "＝ 変動製造マージン （ Ａ ）",
+      "＝ 変動製造マージン （ Ａ：変動製造マージン ）",
       "  [-] 変動販売費",
-      "＝ 限界利益 （ Ｂ ）",
+      "＝ 限界利益 （ Ｂ：限界利益 ）",
       "  [-] 個別固定費",
-      "＝ 貢献利益 （ Ｃ ）",
+      "＝ 貢献利益 （ Ｃ：貢献利益 ）",
       "  [-] 共通固定費",
       "＝ 営業利益"
     ]
@@ -331,24 +332,24 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentView, setCurrentView] = useState("login");
 
-  // Quiz States
+  // Quiz Control States
   const [selectedMode, setSelectedMode] = useState("all");
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
 
-  // Sync / Tracking States
+  // Sync / Cloud Session Storage States
   const [userRecords, setUserRecords] = useState({});
   const [hasResumeData, setHasResumeData] = useState(null);
 
-  // --- Authentication & Initialization ---
+  // --- Remote Authentication Sync Handle ---
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!userId.trim()) return;
 
     setIsLoading(true);
-    console.log(`[Auth Session Initiated] Target ID Key: ${userId}`);
+    console.log(`[Firebase Cloud Handshake] Synchronizing Key ID: ${userId}`);
     try {
       await signInAnonymously(auth);
       
@@ -366,7 +367,7 @@ export default function App() {
             index: data.progressIndex,
             mode: data.progressMode || "all"
           });
-          console.log(`[Resume Check] Unfinished track loaded at index: ${data.progressIndex}, mode: ${data.progressMode}`);
+          console.log(`[Progress Detected] Found temporary session data at Index: ${data.progressIndex}`);
         }
       } else {
         await setDoc(userDocRef, { records: {}, progressIndex: 0, progressMode: "all" });
@@ -375,15 +376,16 @@ export default function App() {
       setIsKeyAuthenticated(true);
       setCurrentView("menu");
     } catch (error) {
-      console.error("[Fatal Login Error] Handshake or write sequence broke:", error);
-      alert("データベースとの同期に失敗しました。認証設定とネットワーク接続を確認してください。");
-    } block: {
+      console.error("[Authentication Sync Drop Exception]", error);
+      alert("同期通信にエラーが発生しました。VITE環境変数及びネットワーク環境を確認してください。");
+    } finally {
       setIsLoading(false);
     }
   };
 
   // --- Quiz Core Engine Router ---
   const startQuiz = (mode, resumeIndex = null) => {
+    console.log(`[Quiz View Switch] Launching Mode: ${mode}, Position Index: ${resumeIndex || 0}`);
     let list = [...QUESTIONS];
     
     if (mode === "wrong") {
@@ -393,7 +395,7 @@ export default function App() {
     }
 
     if (list.length === 0) {
-      alert("該当する問題がありません。別のモードを選択してください。");
+      alert("対象となる問題データが存在しません。別の学習モードを選択してください。");
       return;
     }
 
@@ -403,7 +405,6 @@ export default function App() {
     setSelectedAnswer(null);
     setIsAnswered(false);
     setCurrentView("quiz");
-    console.log(`[Quiz Mode Triggered] Mode: ${mode}, Position: ${resumeIndex || 0}`);
   };
 
   const handleSelectAnswer = (key) => {
@@ -438,9 +439,9 @@ export default function App() {
         progressIndex: isFinished ? 0 : nextIndex,
         progressMode: selectedMode
       });
-      console.log(`[Answer Written] ID: ${currentQuestion.id} -> Cloud index sync position: ${isFinished ? 0 : nextIndex}`);
+      console.log(`[Session Progress Updated] Next Position Index Saved -> ${isFinished ? 0 : nextIndex}`);
     } catch (e) {
-      console.error("[Error] Realtime cloud syncing dropped:", e);
+      console.error("[Firestore Write Aborted]", e);
     }
   };
 
@@ -479,7 +480,7 @@ export default function App() {
       const userDocRef = doc(db, APP_ID, userId.trim());
       await updateDoc(userDocRef, { progressIndex: 0, progressMode: "all" });
       setHasResumeData(null);
-      console.log("[Progress Scrubbed] Session tracking counter reset to zero.");
+      console.log("[Progress Node Reset] Track sequence point index cleared to 0.");
     } catch (e) {
       console.error(e);
     }
@@ -501,7 +502,6 @@ export default function App() {
     setCurrentView("menu");
   };
 
-  // --- Dash Insights Formulas ---
   const getDashboardData = () => {
     const categories = Array.from(new Set(QUESTIONS.map(q => q.category)));
     return categories.map(cat => {
@@ -528,7 +528,7 @@ export default function App() {
       <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4">
         <div className="flex items-center space-x-2 text-indigo-400 animate-pulse text-lg font-semibold">
           <RefreshCw className="animate-spin w-6 h-6" />
-          <span>クラウドから同期用暗号化ノードを展開中...</span>
+          <span>クラウドから学習データを読み込み中...</span>
         </div>
       </div>
     );
@@ -537,7 +537,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans antialiased selection:bg-indigo-500/30">
       
-      {/* Universal Sticky Header Bar */}
+      {/* Top Banner Navigation Header */}
       <header className="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 px-4 py-3 shadow-md">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={handleReturnHome}>
@@ -576,7 +576,7 @@ export default function App() {
               </div>
               <h2 className="text-xl font-bold">マルチデバイス同期システム</h2>
               <p className="text-slate-400 text-xs mt-2 leading-relaxed">
-                自由な合言葉を入力してください。PCで学習した続きを、スマートフォンでも同じキーワードを入力して瞬時に復元・同期できます。
+                同期用の合言葉を入力してください。PCやスマートフォンなど複数端末間で、解答状況やブックマーク履歴、リジューム位置を完全に同期します。
               </p>
             </div>
 
@@ -588,7 +588,7 @@ export default function App() {
                 <input
                   type="text"
                   required
-                  placeholder="例: osaka-studying-2026"
+                  placeholder="例: study-analysis-2026"
                   value={userId}
                   onChange={(e) => setUserId(e.target.value)}
                   className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-indigo-500 transition-colors placeholder:text-slate-600 font-mono text-center text-lg tracking-widest text-indigo-300"
@@ -598,7 +598,7 @@ export default function App() {
                 type="submit"
                 className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl py-3 shadow-lg transition-all text-sm shadow-indigo-600/20"
               >
-                暗号化セッションに接続
+                暗号化同期セッションを開始
               </button>
             </form>
           </div>
@@ -608,23 +608,23 @@ export default function App() {
         {currentView === "menu" && (
           <div className="space-y-6">
             
-            {/* Resume Task Banner */}
+            {/* Resume Session Banner */}
             {hasResumeData && (
-              <div className="bg-gradient-to-r from-indigo-950 to-slate-800 border-2 border-indigo-500/40 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4 animate-fadeIn">
+              <div className="bg-gradient-to-r from-indigo-950 to-slate-800 border-2 border-indigo-500/40 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-start space-x-3">
                   <div className="bg-indigo-500/20 p-2 rounded-xl text-indigo-400 mt-0.5">
                     <AlertTriangle className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-100 text-sm md:text-base">前回の続きからリジューム可能</h3>
+                    <h3 className="font-bold text-slate-100 text-sm md:text-base">前回の未完セッションを復元できます</h3>
                     <p className="text-xs md:text-sm text-slate-300 mt-0.5">
-                      前回はモード <span className="text-indigo-400 font-bold">[{hasResumeData.mode === "all" ? "すべての問題" : hasResumeData.mode === "wrong" ? "前回不正解のみ" : "要復習のみ"}]</span> の <span className="text-indigo-400 font-bold">問題 {hasResumeData.index + 1}</span> で中断しています。
+                      前回はモード <span className="text-indigo-400 font-bold">[{hasResumeData.mode === "all" ? "すべての問題" : hasResumeData.mode === "wrong" ? "前回不正解のみ" : "要復習のみ"}]</span> の <span className="text-indigo-400 font-bold">問題 {hasResumeData.index + 1}</span> まで解き進めています。続きから学習を再開しますか？
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-3 shrink-0 self-end md:self-auto">
                   <button
-                    onClick={async () => { if (window.confirm("進行状況をリセットして最初から開始しますか？")) await handleResetProgress(); }}
+                    onClick={async () => { if (window.confirm("進行状況を初期化して最初から開始しますか？")) await handleResetProgress(); }}
                     className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-xl text-xs font-medium border border-slate-600 transition-all"
                   >
                     最初から始める
@@ -640,25 +640,25 @@ export default function App() {
               </div>
             )}
 
-            {/* Total Performance KPI Cards Group */}
+            {/* Quick Stats Summary Area */}
             {(() => {
               const stats = getTotalStats();
               return (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-sm text-center">
-                    <div className="text-xs font-medium text-slate-400">合計問題数</div>
+                    <div className="text-xs font-medium text-slate-400">総収録問題数</div>
                     <div className="text-xl md:text-2xl font-black mt-1 text-slate-100">{stats.totalQuestions} <span className="text-xs font-normal text-slate-500">問</span></div>
                   </div>
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-sm text-center">
-                    <div className="text-xs font-medium text-emerald-400">現在正解数</div>
+                    <div className="text-xs font-medium text-emerald-400">現在正解マスター数</div>
                     <div className="text-xl md:text-2xl font-black mt-1 text-emerald-400">{stats.correctCount} <span className="text-xs font-normal text-slate-500">/{stats.totalQuestions}</span></div>
                   </div>
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-sm text-center">
-                    <div className="text-xs font-medium text-amber-400">要復習マーク</div>
+                    <div className="text-xs font-medium text-amber-400">要復習キープ数</div>
                     <div className="text-xl md:text-2xl font-black mt-1 text-amber-400">{stats.reviewCount} <span className="text-xs font-normal text-slate-500">問</span></div>
                   </div>
                   <div className="bg-slate-800 rounded-xl p-4 border border-slate-700 shadow-sm text-center">
-                    <div className="text-xs font-medium text-indigo-400">章別達成度</div>
+                    <div className="text-xs font-medium text-indigo-400">章別進捗率</div>
                     <div className="text-xl md:text-2xl font-black mt-1 text-indigo-400">
                       {Math.round((stats.correctCount / stats.totalQuestions) * 100) || 0}%
                     </div>
@@ -667,7 +667,7 @@ export default function App() {
               );
             })()}
 
-            {/* Study Mode Direct Launchers Grid */}
+            {/* Study Mode Choice Grid */}
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-slate-800 rounded-2xl p-5 border border-slate-700 flex flex-col justify-between shadow-sm">
                 <div>
@@ -676,12 +676,12 @@ export default function App() {
                     <span>すべての問題</span>
                   </h3>
                   <p className="text-slate-400 text-xs mt-2 leading-relaxed">
-                    章全体の全13問を漏れなく学習します。経営分析の分類から複雑な財務指標の算出、損益分岐点（CVP）、直接原価計算まで試験範囲をカバー。
+                    章全体の全13問を順序よく網羅的に学習します。基本的な分類問題から複雑な諸指標計算、CVP分析、セグメント別損益の階層体系までカバー。
                   </p>
                 </div>
                 <button
                   onClick={() => startQuiz("all")}
-                  className="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all"
+                  className="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all shadow-md"
                 >
                   学習を開始する
                 </button>
@@ -691,17 +691,17 @@ export default function App() {
                 <div>
                   <h3 className="font-bold text-lg text-amber-400 flex items-center space-x-2">
                     <span className="w-2 h-2 bg-amber-400 rounded-full"></span>
-                    <span>前回不正解の問題</span>
+                    <span>前回不正解の問題のみ</span>
                   </h3>
                   <p className="text-slate-400 text-xs mt-2 leading-relaxed">
-                    現在同期されている不正解フラグデータに絞り込み、リベンジ判定演習を行います。ケアレスミスや論点の混同を撲滅するのに最適です。
+                    現在「不正解」のステータスになっている苦手問題だけをピンポイントで抽出して再トライします。ミスや理解の混同をなくすために最適です。
                   </p>
                 </div>
                 <button
                   onClick={() => startQuiz("wrong")}
-                  className="w-full mt-6 bg-amber-600 hover:bg-amber-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all"
+                  className="w-full mt-6 bg-amber-600 hover:bg-amber-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all shadow-md"
                 >
-                  弱点を徹底克服する
+                  弱点を集中克服する
                 </button>
               </div>
 
@@ -709,50 +709,50 @@ export default function App() {
                 <div>
                   <h3 className="font-bold text-lg text-rose-400 flex items-center space-x-2">
                     <span className="w-2 h-2 bg-rose-400 rounded-full"></span>
-                    <span>要復習の問題</span>
+                    <span>要復習の問題のみ</span>
                   </h3>
                   <p className="text-slate-400 text-xs mt-2 leading-relaxed">
-                    ご自身が要復習としてブックマークした問題だけを徹底反復します。公式の暗記状況や特定の計算手順、問題構造の理解確認用です。
+                    解説画面等で「要復習」にチェックを入れたマイリスト問題に絞り込んで徹底反復します。重要公式や解法プロセスの見直しに便利です。
                   </p>
                 </div>
                 <button
                   onClick={() => startQuiz("review")}
-                  className="w-full mt-6 bg-rose-600 hover:bg-rose-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all"
+                  className="w-full mt-6 bg-rose-600 hover:bg-rose-500 text-white font-medium py-2.5 rounded-xl text-sm transition-all shadow-md"
                 >
-                  要復習リストを実行
+                  要復習リストへ進む
                 </button>
               </div>
             </div>
 
-            {/* Utility Sub Nav Footers */}
+            {/* Sub Navigations Footer Layout */}
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <button
                 onClick={() => setCurrentView("history")}
                 className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white px-4 py-2 bg-slate-800 rounded-xl border border-slate-700 transition-colors"
               >
                 <List className="w-4 h-4 text-indigo-400" />
-                <span>収録問題の一覧・個別ステータス</span>
+                <span>収録問題の一覧・個別同期履歴</span>
               </button>
               <button
                 onClick={() => setCurrentView("dashboard")}
                 className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white px-4 py-2 bg-slate-800 rounded-xl border border-slate-700 transition-colors"
               >
                 <Award className="w-4 h-4 text-emerald-400" />
-                <span>カテゴリ別正解比率アナリティクス</span>
+                <span>カテゴリ別習得アナリティクス</span>
               </button>
             </div>
 
           </div>
         )}
 
-        {/* --- VIEW: Interactive Test / Quiz Core Workspace --- */}
+        {/* --- VIEW: Interactive Test Arena (出題画面) --- */}
         {currentView === "quiz" && filteredQuestions[currentIndex] && (
           (() => {
             const q = filteredQuestions[currentIndex];
             return (
               <div className="space-y-6">
                 
-                {/* Header Context Tracking Module */}
+                {/* Upper Status Header */}
                 <div className="flex items-center justify-between bg-slate-800 px-4 py-3 rounded-xl border border-slate-700">
                   <div className="flex items-center space-x-2">
                     <span className="text-indigo-400 text-xs font-bold bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
@@ -765,31 +765,27 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Primary Question Description Workspace Section */}
+                {/* Primary Question Content Canvas */}
                 <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 md:p-6 shadow-sm space-y-4">
                   <p className="text-sm md:text-base font-medium leading-relaxed whitespace-pre-wrap text-slate-100">
                     {q.question}
                   </p>
 
-                  {/* ========================================== */}
-                  {/* 【完全網羅】問題別 必須データテーブル構造のHTML再現 */}
-                  {/* ========================================== */}
-
-                  {/* 1. 問題5：指標と空欄A~D対応表 */}
+                  {/* 1. 問題5：効率性分析指標対応マトリックス表（ネタバレなし） */}
                   {q.id === 5 && q.matrix && (
                     <div className="my-4 max-w-md mx-auto border border-slate-700 rounded-xl overflow-hidden text-xs shadow-md">
                       <table className="w-full text-left border-collapse bg-slate-900">
                         <thead>
                           <tr className="bg-slate-700/50 border-b border-slate-700 text-slate-300">
                             <th className="p-3 font-bold">指標</th>
-                            <th className="p-3 font-bold text-center w-36">記号（空欄）</th>
+                            <th className="p-3 font-bold text-center w-36">記欄（空欄記号）</th>
                           </tr>
                         </thead>
                         <tbody>
                           {q.matrix.map((row, idx) => (
                             <tr key={idx} className="border-b border-slate-800 hover:bg-slate-800/30">
                               <td className="p-3 font-medium text-slate-200">{row.metric}</td>
-                              <td className="p-3 text-center font-mono font-bold text-indigo-400">{row.key}</td>
+                              <td className="p-3 text-center font-mono font-bold text-indigo-400 bg-slate-850">{row.key}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -797,7 +793,7 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 2. 問題3：財務分析用B/S */}
+                  {/* 2. 問題3：投下資本利益率計算用B/S原始値データ表 */}
                   {q.bsTable && (
                     <div className="my-6 border border-slate-700 rounded-xl overflow-hidden text-xs shadow-md">
                       <div className="bg-slate-700 text-center font-bold py-2 text-slate-200 border-b border-slate-600">
@@ -806,13 +802,13 @@ export default function App() {
                       <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse bg-slate-900 min-w-[500px]">
                           <thead>
-                            <tr className="bg-slate-800/60 border-b border-slate-700 text-slate-400">
+                            <tr className="bg-slate-800/50 border-b border-slate-700 text-slate-400">
                               <th className="p-2 border-r border-slate-700 w-1/2">資産の部</th>
                               <th className="p-2 w-1/2">負債・純資産の部</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {Array.from({ length: Math.max(q.bsTable.left.length, q.bsTable.right.length) }).map((_, idx) => {
+                            {q.bsTable.left?.map((_, idx) => {
                               const l = q.bsTable.left[idx] || { name: "", val: "" };
                               const r = q.bsTable.right[idx] || { name: "", val: "" };
                               return (
@@ -834,7 +830,7 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 3. 問題3 & 問題12：財務諸表P/L要旨データ */}
+                  {/* 3. 問題3 & 問題12：損益計算書要旨データ表 */}
                   {q.plTable && (
                     <div className="my-6 max-w-sm mx-auto border border-slate-700 rounded-xl overflow-hidden text-xs shadow-md">
                       <div className="bg-slate-700 text-center font-bold py-2 text-slate-200 border-b border-slate-600">
@@ -859,10 +855,10 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 4. 問題4 & 問題9：企業分析個別情報リスト */}
+                  {/* 4. 問題4 & 問題9：財務情報バラ値データリスト */}
                   {q.dataValues && (
                     <div className="my-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 max-w-xl mx-auto text-xs bg-slate-900 p-4 rounded-xl border border-slate-700 font-mono shadow-md">
-                      <div className="col-span-1 sm:col-span-2 font-bold text-slate-400 font-sans mb-1">【Ａ社関連財務データ資料】</div>
+                      <div className="col-span-1 sm:col-span-2 font-bold text-slate-400 font-sans mb-1">【提示資料データ】</div>
                       {q.dataValues.map((d, idx) => (
                         <div key={idx} className="flex justify-between border-b border-slate-800 pb-1">
                           <span className="text-slate-400">{d.name}</span>
@@ -877,7 +873,7 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 5. 問題6：基本安全性分析対象B/S */}
+                  {/* 5. 問題6：安全性分析B/Sマトリックス */}
                   {q.bsData && (
                     <div className="my-6 border border-slate-700 rounded-xl overflow-hidden text-xs shadow-md">
                       <div className="bg-slate-700 text-center font-bold py-2 text-slate-200 border-b border-slate-600">
@@ -891,7 +887,7 @@ export default function App() {
                           </tr>
                         </thead>
                         <tbody>
-                          {Array.from({ length: Math.max(q.bsData.left.length, q.bsData.right.length) }).map((_, idx) => {
+                          {q.bsData.left?.map((_, idx) => {
                             const l = q.bsData.left[idx] || { name: "", val: "" };
                             const r = q.bsData.right[idx] || { name: "", val: "" };
                             return (
@@ -912,7 +908,7 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 6. 問題7：2社並列大規模比較貸借対照表マトリックス */}
+                  {/* 6. 問題7：財務安全性2社比較大規模B/Sデータ */}
                   {q.bsComparisonTable && (
                     <div className="my-6 border border-slate-700 rounded-xl overflow-hidden text-xs shadow-md">
                       <div className="bg-slate-700 text-center font-bold py-2 text-slate-200 border-b border-slate-600">
@@ -931,7 +927,7 @@ export default function App() {
                             </tr>
                           </thead>
                           <tbody>
-                            {q.bsComparisonTable.rows.map((row, idx) => (
+                            {q.bsComparisonTable.rows?.map((row, idx) => (
                               <tr key={idx} className="border-b border-slate-800/80 hover:bg-slate-800/20 font-mono">
                                 <td className="p-2 border-r border-slate-700 text-slate-300">{row[0]}</td>
                                 <td className="p-2 text-right text-indigo-300 border-r border-slate-700">{row[1]?.toLocaleString()}</td>
@@ -947,41 +943,26 @@ export default function App() {
                     </div>
                   )}
 
-                  {/* 7. 問題9 & 問題11：実績値原価データ等 */}
+                  {/* 7. 問題11：CVP基礎実績原価値 */}
                   {q.calcTable && (
                     <div className="my-4 max-w-md mx-auto text-xs bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5 shadow-md">
-                      <div className="font-bold text-slate-400 mb-1">【計算根拠用 実績データ情報】</div>
+                      <div className="font-bold text-slate-400 mb-1">【計算根拠用 実績データ】</div>
                       {q.calcTable.map((item, idx) => (
                         <div key={idx} className="flex justify-between border-b border-slate-800 pb-1">
                           <span className="text-slate-300">{item.item}</span>
                           <span className="text-slate-100 font-mono font-bold">{item.value}</span>
                         </div>
                       ))}
-                      {q.extraInfo && (
-                        <div className="text-[11px] text-slate-500 pt-1 font-sans">
-                          {q.extraInfo}
-                        </div>
-                      )}
                     </div>
                   )}
 
-                  {/* 8. 問題13：直接原価計算構造の出題時プレビュー */}
-                  {q.id === 13 && q.segmentFlow && (
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-700 text-xs font-mono max-w-md mx-auto shadow-md">
-                      <div className="font-sans font-bold text-slate-400 mb-2">【セグメント別階層構造体系】</div>
-                      {q.segmentFlow.map((line, idx) => (
-                        <div key={idx} className={line.startsWith('＝') ? 'text-indigo-400 font-bold' : 'text-slate-400'}>
-                          {line}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {/* 【抜本修正】問題13の出題時には解答図・フロー等を一切埋め込まず、クイズとしての正常性を担保 */}
 
                 </div>
 
                 {/* Multiple Choices Interactivity List */}
                 <div className="space-y-3">
-                  {q.options.map((opt) => {
+                  {q.options?.map((opt) => {
                     let btnStyle = "bg-slate-800 border-slate-700 hover:border-indigo-500/50";
                     if (selectedAnswer === opt.key) {
                       btnStyle = "bg-indigo-950/40 border-indigo-500 text-indigo-200";
@@ -1014,7 +995,7 @@ export default function App() {
                   })}
                 </div>
 
-                {/* Action Controls Section */}
+                {/* Control Navigation Action Footer Area */}
                 <div className="flex items-center justify-between pt-2">
                   <button
                     onClick={handleReturnHome}
@@ -1042,9 +1023,9 @@ export default function App() {
                   )}
                 </div>
 
-                {/* --- Solution Commentary Canvas Block --- */}
+                {/* --- Solution Commentary Canvas Block (解答確定後にのみ出現) --- */}
                 {isAnswered && (
-                  <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 md:p-6 space-y-4 shadow-inner">
+                  <div className="bg-slate-800 rounded-2xl border border-slate-700 p-5 md:p-6 space-y-4 shadow-inner animate-fadeIn">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-slate-700 gap-3">
                       <div className="flex items-center space-x-2">
                         {selectedAnswer === q.answer ? (
@@ -1067,7 +1048,7 @@ export default function App() {
                           onChange={() => toggleReviewFlag(q.id)}
                           className="w-4 h-4 accent-indigo-600 bg-slate-900 border-slate-700 rounded focus:ring-0"
                         />
-                        <span>この問題を「要復習」としてマイリストにストック</span>
+                        <span>この問題を「要復習」リストにストック</span>
                       </label>
                     </div>
 
@@ -1078,7 +1059,7 @@ export default function App() {
                       </p>
                     </div>
 
-                    {/* 解説用補助コンポーネント（定義されていればレンダリング） */}
+                    {/* 問題1：概要分類表 */}
                     {q.tableData && (
                       <div className="overflow-x-auto text-xs bg-slate-900 p-3 rounded-xl border border-slate-700">
                         <table className="w-full text-left">
@@ -1100,6 +1081,7 @@ export default function App() {
                       </div>
                     )}
 
+                    {/* 公式集コードエリア */}
                     {q.formulas && (
                       <div className="bg-slate-900 p-3 rounded-xl border border-slate-700 space-y-1.5 text-xs">
                         <div className="font-bold text-slate-400 mb-1">【本問に関する計算公式まとめ】</div>
@@ -1112,6 +1094,7 @@ export default function App() {
                       </div>
                     )}
 
+                    {/* 問題7：優劣比較表 */}
                     {q.comparisonData && (
                       <div className="text-xs bg-slate-900 rounded-xl border border-slate-700 overflow-hidden">
                         <table className="w-full text-left border-collapse">
@@ -1137,6 +1120,7 @@ export default function App() {
                       </div>
                     )}
 
+                    {/* 問題10：固変分解費用パターン */}
                     {q.costType && (
                       <div className="text-xs bg-slate-900 rounded-xl border border-slate-700 overflow-hidden p-3 space-y-2">
                         <div className="font-bold text-slate-400 mb-1">【費用の分解性質パターン】</div>
@@ -1151,6 +1135,21 @@ export default function App() {
                         ))}
                       </div>
                     )}
+
+                    {/* =================================================================== */}
+                    {/* 【修正の核】問題13：解答となる計算階層フロー構造図を「解説画面」にのみ安全に配置 */}
+                    {/* =================================================================== */}
+                    {q.id === 13 && q.segmentFlowExplain && (
+                      <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs font-mono max-w-md mx-auto shadow-md animate-fadeIn">
+                        <div className="font-sans font-bold text-slate-400 mb-2">【正解の直接原価計算セグメント階層構造体系】</div>
+                        {q.segmentFlowExplain.map((line, idx) => (
+                          <div key={idx} className={line.includes('＝') ? 'text-emerald-400 font-bold' : 'text-slate-400'}>
+                            {line}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                   </div>
                 )}
               </div>
@@ -1227,7 +1226,7 @@ export default function App() {
           </div>
         )}
 
-        {/* --- VIEW: Recharts Analytics Insights Dashboard --- */}
+        {/* --- VIEW: Recharts Analytics insights Dashboard --- */}
         {currentView === "dashboard" && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -1244,7 +1243,7 @@ export default function App() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
-              {/* Pie Component */}
+              {/* Share Pie Component */}
               <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm flex flex-col items-center justify-center">
                 <h3 className="text-xs font-bold text-slate-300 mb-4 text-center">全13問 正解シェア率</h3>
                 {(() => {
@@ -1272,9 +1271,9 @@ export default function App() {
                 })()}
               </div>
 
-              {/* Bar Metric Charts Component */}
+              {/* Bar Metric Charts Breakdown Component */}
               <div className="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm md:col-span-2">
-                <h3 className="text-xs font-bold text-slate-300 mb-4">章内・論点カテゴリ別の習得状況</h3>
+                <h3 className="text-xs font-bold text-slate-300 mb-4">章内・論点カテゴリ別の詳細進捗</h3>
                 <div className="w-full h-44 text-[10px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={getDashboardData()} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
@@ -1308,9 +1307,9 @@ export default function App() {
         )}
       </main>
 
-      <footer className="mt-16 border-t border-slate-800 bg-slate-950 py-4 text-center text-xs text-slate-600">
+      <header className="mt-16 border-t border-slate-800 bg-slate-950 py-4 text-center text-xs text-slate-600">
         <p>© 2026 中小企業診断士 一次・二次試験対策スマート問題集 / Secured Framework on Firebase Node.</p>
-      </footer>
+      </header>
     </div>
   );
 }
